@@ -4,6 +4,8 @@ const path = require("path");
 const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
 const MONGO_URL = "mongodb://127.0.0.1:27017/trekzo";
+const methodOverride = require("method-override");
+
 main()
   .then(() => {
     console.log("connected to DB");
@@ -14,6 +16,7 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -51,11 +54,17 @@ app.post("/listings", async (req, res) => {
 });
 
 //edit route
-
 app.get("/listings/:id/edit", async (req, res) => {
   let { id } = req.params;
   let listing = await Listing.findById(id);
   res.render("listings/edit.ejs", { listing });
+});
+
+//update route
+app.put("/listings/:id", async (req, res) => {
+  let { id } = req.params;
+  await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  res.redirect(`/listings/${id}`);
 });
 
 // app.get("/listing", async (req, res) => {
