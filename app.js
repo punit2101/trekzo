@@ -16,7 +16,7 @@ async function main() {
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({ encoded: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -39,6 +39,15 @@ app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
   let listing = await Listing.findById(id);
   res.render("listings/show.ejs", { listing });
+});
+
+// create route
+app.post("/listings", async (req, res) => {
+  // let { title, description, image, price, country, location } = req.body ;
+  // let listing = req.body.listing;
+  const newListing = new Listing(req.body.listing);
+  await newListing.save();
+  res.redirect("/listings");
 });
 
 // app.get("/listing", async (req, res) => {
