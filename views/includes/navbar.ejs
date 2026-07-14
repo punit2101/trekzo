@@ -1,0 +1,45 @@
+<nav class="bg-white shadow-md sticky top-0">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center justify-between h-20">
+      <a
+        href="/"
+        class="flex items-center gap-2 text-2xl font-bold text-red-500"
+      >
+        <i class="fa-regular fa-compass text-3xl"></i>
+        <span>Trekzo</span>
+      </a>
+
+      <div class="hidden md:flex h-full items-center gap-8">
+        <a
+          href="/"
+          class="flex items-center h-full text-gray-700 hover:text-red-500"
+        >
+          Home
+        </a>
+
+        <a
+          href="/listings"
+          class="flex items-center h-full text-gray-700 hover:text-red-500"
+        >
+          All Listings
+        </a>
+
+        <a
+          href="/listings/new"
+          class="flex items-center h-full text-gray-700 hover:text-red-500"
+        >
+          Create New Listing
+        </a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-2xl text-gray-700">☰</button>
+    </div>
+    <div
+      id="mobile-menu"
+      class="md:hidden max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out bg-white"
+    >
+      <a href="/" class="block py-2">Home</a>
+      <a href="/listings" class="block py-2">All Listings</a>
+      <a href="/listings/new" class="block py-2">Create New Listing</a>
+    </div>
+  </div>
+</nav>
