@@ -1,17 +1,48 @@
 <% layout("/layouts/boilerplate.ejs")%>
 <body>
-  <h3>Listing Details :</h3>
-  <ul>
-    <li><%= listing.title %></li>
-    <li><%= listing.description %></li>
-    <li>&#8377; <%= listing.price.toLocaleString("en-IN") %></li>
-    <!--  for commas in number -->
-    <li><%= listing.location %></li>
-    <li><%= listing.country %></li>
-  </ul>
-  <br />
-  <a href="/listings/<%= listing.id %>/edit">edit this listing</a>
-  <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-    <button>Delete</button>
-  </form>
+  <div class="max-w-5xl mx-auto px-6 py-10">
+    <h1 class="text-4xl font-bold text-gray-900 mb-6"><%= listing.title %></h1>
+
+    <img
+      src="<%= listing.image %>"
+      alt="<%= listing.title %>"
+      class="w-full h-[500px] object-cover rounded-2xl shadow-md"
+    />
+
+    <div class="mt-8 bg-white rounded-2xl shadow p-6 space-y-4">
+      <p class="text-lg text-gray-600">
+        📍 <%= listing.location %>, <%= listing.country %>
+      </p>
+
+      <p class="text-2xl font-bold text-gray-900">
+        ₹ <%= listing.price.toLocaleString("en-IN") %>
+        <span class="text-base font-normal text-gray-500">/ night</span>
+      </p>
+
+      <hr class="border-gray-200" />
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Description</h2>
+
+        <p class="text-gray-700 leading-7"><%= listing.description %></p>
+      </div>
+    </div>
+
+    <div class="mt-8 flex gap-4">
+      <a
+        href="/listings/<%= listing._id %>/edit"
+        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+      >
+        Edit
+      </a>
+
+      <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+        <button
+          class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition"
+        >
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
 </body>
